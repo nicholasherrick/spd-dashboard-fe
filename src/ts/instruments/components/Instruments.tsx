@@ -7,7 +7,7 @@ const Instruments = () => {
   return (
     <>
       <PageHeader text="Manage Instruments" />
-      <Button type="button" onClick={handleAdd}>
+      <Button className="btn btn-primary" type="button" onClick={handleAdd}>
         Add
       </Button>
     </>
