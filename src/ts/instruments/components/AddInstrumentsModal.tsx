@@ -19,7 +19,11 @@ export const AddInstrumentsModal = ({ show, handleHide }: AddModalProps) => {
               <AddInstrumentsFields />
             </Modal.Body>
             <Modal.Footer>
-              <Button type="button" className="btn btn-default">
+              <Button
+                type="button"
+                className="btn btn-default"
+                onClick={handleHide}
+              >
                 Cancel
               </Button>
               <Button

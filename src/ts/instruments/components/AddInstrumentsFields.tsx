@@ -2,6 +2,11 @@ import VerticalField from "../../shared/components/fields/VerticalField";
 import { SterilizationTypes } from "../../shared/constants";
 
 const AddInstrumentsFields = () => {
+  const SterilizationTypeOptions = SterilizationTypes.map((type) => ({
+    value: type,
+    name: type,
+  }));
+
   return (
     <>
       <VerticalField name="Name" label="Name" component="input" />
@@ -10,10 +15,7 @@ const AddInstrumentsFields = () => {
         name="SterilizationType"
         label="Sterilization Type"
         component="select"
-        options={SterilizationTypes.map((type) => ({
-          value: type,
-          name: type,
-        }))}
+        options={SterilizationTypeOptions}
       />
     </>
   );
