@@ -9,13 +9,16 @@ const VerticalField = ({ name, label, component, options }: FieldProps) => {
         {label}
       </label>
       <Field name={name} component={component} className="form-control">
-        {options
-          ? options.map((option: SelectFieldOption) => (
+        {options ? (
+          <>
+            <option value="">Select</option>
+            {options.map((option: SelectFieldOption) => (
               <option key={option.name} value={option.value}>
                 {option.name}
               </option>
-            ))
-          : null}
+            ))}
+          </>
+        ) : null}
       </Field>
     </div>
   );
