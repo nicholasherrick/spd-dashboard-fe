@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import PageHeader from "../../shared/components/PageHeader";
 import Button from "../../shared/components/Button";
-import { AddModal } from "./AddModal";
+import { AddInstrumentsModal } from "./AddInstrumentsModal";
 
 const Instruments = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,9 +18,9 @@ const Instruments = () => {
     <>
       <PageHeader text="Manage Instruments" />
       <Button className="btn btn-primary" type="button" onClick={handleShow}>
-        Add
+        New
       </Button>
-      <AddModal show={showModal} handleHide={handleHide} />
+      <AddInstrumentsModal show={showModal} handleHide={handleHide} />
     </>
   );
 };
