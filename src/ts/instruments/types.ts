@@ -8,3 +8,14 @@ export interface AddInstrumentFormValues {
   ImageURL: string;
   SterilizationType: string;
 }
+
+export interface Instrument {
+  Id: string;
+  Name: string;
+  ImageURL: string;
+  SterilizationType: string;
+}
+
+export interface InstrumentTableRowProps {
+  instrument: Instrument;
+}
