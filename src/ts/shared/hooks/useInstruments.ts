@@ -13,7 +13,7 @@ const useInstruments = () => {
         getLocalStorage(LocalStorageKeys.InstrumentList) || [];
       setLocalStorage(LocalStorageKeys.InstrumentList, [
         ...existingData,
-        { ...newInstrument, Id: existingData.length + 1 },
+        { ...newInstrument, Id: crypto.randomUUID() },
       ]);
     },
     [getLocalStorage, setLocalStorage]
