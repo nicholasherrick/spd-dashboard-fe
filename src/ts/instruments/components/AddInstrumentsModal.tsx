@@ -1,22 +1,16 @@
 import Modal from "react-bootstrap/Modal";
+import { Form } from "react-final-form";
+
 import { type AddModalProps, type AddInstrumentFormValues } from "../types";
 import AddInstrumentsFields from "./AddInstrumentsFields";
-
-import { Form } from "react-final-form";
 import Button from "../../shared/components/Button";
-import useLocalStorage from "../../shared/hooks/useLocalStorage";
-import { LocalStorageKeys } from "../../shared/constants";
+import useInstruments from "../../shared/hooks/useInstruments";
 
 const AddInstrumentsModal = ({ show, handleHide }: AddModalProps) => {
-  const { setLocalStorage, getLocalStorage } = useLocalStorage();
+  const { addInstrument } = useInstruments();
 
   const onSubmit = (values: AddInstrumentFormValues) => {
-    const existingData = getLocalStorage(LocalStorageKeys.InstrumentList) || [];
-    setLocalStorage(LocalStorageKeys.InstrumentList, [
-      ...existingData,
-      { ...values, Id: existingData.length + 1 },
-    ]);
-
+    addInstrument(values);
     handleHide();
   };
 
