@@ -1,11 +1,9 @@
 import InstrumentsTableRow from "./InstrumentsTableRow";
-import useLocalStorage from "../../shared/hooks/useLocalStorage";
-import { LocalStorageKeys } from "../../shared/constants";
 import { type Instrument } from "../types";
+import useInstruments from "../hooks/useInstruments";
 
 const InstrumentsTable = () => {
-  const { getLocalStorage } = useLocalStorage();
-  const instrumentList = getLocalStorage(LocalStorageKeys.InstrumentList);
+  const { instrumentList } = useInstruments();
 
   return instrumentList?.length ? (
     <div className="table-responsive">
@@ -14,6 +12,7 @@ const InstrumentsTable = () => {
           <tr>
             <th scope="col">Name</th>
             <th scope="col">SterilizationType</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody className="table-group-divider">

@@ -4,13 +4,13 @@ import { Form } from "react-final-form";
 import { type AddModalProps, type AddInstrumentFormValues } from "../types";
 import AddInstrumentsFields from "./AddInstrumentsFields";
 import Button from "../../shared/components/Button";
-import useInstruments from "../../shared/hooks/useInstruments";
+import useInstruments from "../hooks/useInstruments";
 
 const AddInstrumentsModal = ({ show, handleHide }: AddModalProps) => {
-  const { addInstrument } = useInstruments();
+  const { createInstrument } = useInstruments();
 
   const onSubmit = (values: AddInstrumentFormValues) => {
-    addInstrument(values);
+    createInstrument(values);
     handleHide();
   };
 

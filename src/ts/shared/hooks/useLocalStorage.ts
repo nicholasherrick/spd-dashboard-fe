@@ -7,11 +7,12 @@ export const useLocalStorage = () => {
     return data ? JSON.parse(data) : undefined;
   }, []);
 
-  const setLocalStorage = useCallback(
-    (key: string, value: unknown) =>
-      localStorage.setItem(key, JSON.stringify(value)),
-    []
-  );
+  const setLocalStorage = useCallback((key: string, value: unknown) => {
+    localStorage.setItem(key, JSON.stringify(value));
+
+    // Dispatch storage event so that storage can be watched for changes
+    window.dispatchEvent(new Event("storage"));
+  }, []);
 
   return {
     getLocalStorage,
