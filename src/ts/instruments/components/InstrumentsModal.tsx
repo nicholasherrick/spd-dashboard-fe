@@ -1,12 +1,19 @@
+import { useMemo } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Form } from "react-final-form";
 
-import { type AddModalProps, type AddInstrumentFormValues } from "../types";
+import type { AddModalProps, AddInstrumentFormValues } from "../types";
 import AddInstrumentsFields from "./AddInstrumentsFields";
 import Button from "../../shared/components/Button";
 import useInstruments from "../hooks/useInstruments";
+import { InstrumentsModalContext } from "../constants";
 
-const AddInstrumentsModal = ({ show, handleHide }: AddModalProps) => {
+const InstrumentsModal = ({
+  show,
+  handleHide,
+  modalContext,
+  currentInst,
+}: AddModalProps) => {
   const { createInstrument } = useInstruments();
 
   const onSubmit = (values: AddInstrumentFormValues) => {
@@ -14,13 +21,25 @@ const AddInstrumentsModal = ({ show, handleHide }: AddModalProps) => {
     handleHide();
   };
 
+  const isAdd = modalContext === InstrumentsModalContext.Add;
+
+  const initialValues = useMemo(() => {
+    if (isAdd && currentInst) {
+      return undefined;
+    } else {
+      return currentInst;
+    }
+  }, [currentInst, isAdd]);
+
   return (
     <Modal show={show} onHide={handleHide} size="lg">
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} initialValues={initialValues}>
         {({ handleSubmit, pristine, submitting }) => (
           <form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
-              <Modal.Title>Add New Instrument</Modal.Title>
+              <Modal.Title>
+                {isAdd ? "Add New Instrument" : "Edit Instrument"}
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <AddInstrumentsFields />
@@ -38,7 +57,7 @@ const AddInstrumentsModal = ({ show, handleHide }: AddModalProps) => {
                 className="btn btn-primary"
                 disabled={pristine || submitting}
               >
-                Add
+                {isAdd ? "Create" : "Save"}
               </Button>
             </Modal.Footer>
           </form>
@@ -48,4 +67,4 @@ const AddInstrumentsModal = ({ show, handleHide }: AddModalProps) => {
   );
 };
 
-export default AddInstrumentsModal;
+export default InstrumentsModal;

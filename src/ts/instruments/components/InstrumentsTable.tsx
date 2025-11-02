@@ -1,8 +1,8 @@
 import InstrumentsTableRow from "./InstrumentsTableRow";
-import { type Instrument } from "../types";
+import type { Instrument, InstrumentTableProps } from "../types";
 import useInstruments from "../hooks/useInstruments";
 
-const InstrumentsTable = () => {
+const InstrumentsTable = ({ showModal }: InstrumentTableProps) => {
   const { instrumentList } = useInstruments();
 
   return instrumentList?.length ? (
@@ -17,7 +17,11 @@ const InstrumentsTable = () => {
         </thead>
         <tbody className="table-group-divider">
           {instrumentList.map((inst: Instrument) => (
-            <InstrumentsTableRow key={inst.Id} instrument={inst} />
+            <InstrumentsTableRow
+              key={inst.Id}
+              instrument={inst}
+              showModal={showModal}
+            />
           ))}
         </tbody>
       </table>

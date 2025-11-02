@@ -1,7 +1,7 @@
-import {
-  type ReactNode,
-  type PropsWithChildren,
-  type ComponentPropsWithoutRef,
+import type {
+  ReactNode,
+  PropsWithChildren,
+  ComponentPropsWithoutRef,
 } from "react";
 
 export interface PageHeaderProps {

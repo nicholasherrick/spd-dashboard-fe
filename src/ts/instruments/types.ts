@@ -1,6 +1,8 @@
 export interface AddModalProps {
   show: boolean;
   handleHide: () => void;
+  modalContext: string;
+  currentInst: Instrument | undefined;
 }
 
 export interface AddInstrumentFormValues {
@@ -16,6 +18,11 @@ export interface Instrument {
   SterilizationType: string;
 }
 
+export interface InstrumentTableProps {
+  showModal: (a: string, b?: Instrument) => void;
+}
+
 export interface InstrumentTableRowProps {
   instrument: Instrument;
+  showModal: (a: string, b?: Instrument) => void;
 }

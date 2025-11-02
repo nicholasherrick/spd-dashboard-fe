@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { type AddInstrumentFormValues, type Instrument } from "../types";
+import type { AddInstrumentFormValues, Instrument } from "../types";
 
 import useLocalStorage from "../../shared/hooks/useLocalStorage";
 import { LocalStorageKeys } from "../../shared/constants";

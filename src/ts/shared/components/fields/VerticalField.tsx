@@ -1,6 +1,6 @@
 import { Field } from "react-final-form";
-import { type SelectFieldOption } from "../../types";
-import { type FieldProps } from "react-final-form";
+import type { SelectFieldOption } from "../../types";
+import type { FieldProps } from "react-final-form";
 
 const VerticalField = ({ name, label, component, options }: FieldProps) => {
   return (
