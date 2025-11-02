@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import type { AddInstrumentFormValues, Instrument } from "../types";
+import type { InstrumentFormValues, Instrument } from "../types";
 
 import useLocalStorage from "../../shared/hooks/useLocalStorage";
 import { LocalStorageKeys } from "../../shared/constants";
@@ -19,7 +19,7 @@ const useInstruments = () => {
   );
 
   const createInstrument = useCallback(
-    (newInstrument: AddInstrumentFormValues) => {
+    (newInstrument: InstrumentFormValues) => {
       const existingData = getExistingData();
 
       setLocalStorage(LocalStorageKeys.InstrumentList, [
@@ -32,20 +32,39 @@ const useInstruments = () => {
 
   const deleteInstrument = useCallback(
     (id: string) => {
+      if (
+        window.confirm("Are you sure you would like to delete this instrument?")
+      ) {
+        const existingData = getExistingData();
+
+        existingData.some((inst: Instrument, index: number) => {
+          if (inst.Id === id) {
+            const tempArr = [...existingData];
+            tempArr.splice(index, 1);
+
+            setLocalStorage(LocalStorageKeys.InstrumentList, tempArr);
+
+            return true;
+          } else {
+            return false;
+          }
+        });
+      }
+    },
+    [getExistingData, setLocalStorage]
+  );
+
+  const updateInstrument = useCallback(
+    (values: InstrumentFormValues, id: string) => {
       const existingData = getExistingData();
 
-      existingData.some((inst: Instrument, index: number) => {
-        if (inst.Id === id) {
-          const tempArr = [...existingData];
-          tempArr.splice(index, 1);
+      const editIndex = existingData.findIndex(
+        (inst: Instrument) => inst.Id === id
+      );
 
-          setLocalStorage(LocalStorageKeys.InstrumentList, tempArr);
+      existingData.splice(editIndex, 1, values);
 
-          return true;
-        } else {
-          return false;
-        }
-      });
+      setLocalStorage(LocalStorageKeys.InstrumentList, [...existingData]);
     },
     [getExistingData, setLocalStorage]
   );
@@ -60,7 +79,12 @@ const useInstruments = () => {
     return () => window.removeEventListener("storage", handleStorage);
   }, [getInstrumentList]);
 
-  return { instrumentList, createInstrument, deleteInstrument };
+  return {
+    instrumentList,
+    createInstrument,
+    deleteInstrument,
+    updateInstrument,
+  };
 };
 
 export default useInstruments;

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Form } from "react-final-form";
 
-import type { AddModalProps, AddInstrumentFormValues } from "../types";
+import type { AddModalProps, InstrumentFormValues } from "../types";
 import AddInstrumentsFields from "./AddInstrumentsFields";
 import Button from "../../shared/components/Button";
 import useInstruments from "../hooks/useInstruments";
@@ -14,14 +14,18 @@ const InstrumentsModal = ({
   modalContext,
   currentInst,
 }: AddModalProps) => {
-  const { createInstrument } = useInstruments();
-
-  const onSubmit = (values: AddInstrumentFormValues) => {
-    createInstrument(values);
-    handleHide();
-  };
+  const { createInstrument, updateInstrument } = useInstruments();
 
   const isAdd = modalContext === InstrumentsModalContext.Add;
+
+  const onSubmit = (values: InstrumentFormValues) => {
+    if (isAdd) {
+      createInstrument(values);
+    } else if (currentInst) {
+      updateInstrument(values, currentInst.Id);
+    }
+    handleHide();
+  };
 
   const initialValues = useMemo(() => {
     if (isAdd && currentInst) {

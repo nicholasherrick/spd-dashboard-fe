@@ -5,7 +5,7 @@ export interface AddModalProps {
   currentInst: Instrument | undefined;
 }
 
-export interface AddInstrumentFormValues {
+export interface InstrumentFormValues {
   name: string;
   ImageURL: string;
   SterilizationType: string;
