@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
+
+import Navbar from "../ts/layout/components/Navbar";
 import "../scss/App.scss";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -18,6 +20,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <React.Fragment>
+      <Navbar />
       <div className="container">
         <Outlet />
       </div>
