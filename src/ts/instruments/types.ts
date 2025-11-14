@@ -16,6 +16,7 @@ export interface Instrument {
   Name: string;
   ImageURL: string;
   SterilizationType: string;
+  HandWashOnly: boolean;
 }
 
 export interface InstrumentTableProps {

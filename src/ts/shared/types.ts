@@ -3,6 +3,7 @@ import type {
   PropsWithChildren,
   ComponentPropsWithoutRef,
 } from "react";
+import type { FieldProps } from "react-final-form";
 
 export interface PageHeaderProps {
   text: string;
@@ -18,3 +19,9 @@ export interface SelectFieldOption {
   value: string | number;
   name: string;
 }
+
+export interface VerticalField {
+  type?: string;
+}
+
+export type VerticalFieldProps = FieldProps & VerticalField;

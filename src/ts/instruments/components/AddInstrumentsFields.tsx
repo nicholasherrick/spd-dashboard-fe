@@ -17,6 +17,13 @@ const AddInstrumentsFields = () => {
         component="select"
         options={SterilizationTypeOptions}
       />
+      <VerticalField
+        name="HandWashOnly"
+        label="Hand Wash Only?"
+        component="input"
+        type="checkbox"
+        options={SterilizationTypeOptions}
+      />
     </>
   );
 };

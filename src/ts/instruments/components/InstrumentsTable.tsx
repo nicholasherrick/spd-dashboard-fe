@@ -28,6 +28,7 @@ const InstrumentsTable = ({ showModal, searchText }: InstrumentTableProps) => {
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Sterilization Type</th>
+            <th scope="col">Hand Wash Only?</th>
             <th scope="col"></th>
           </tr>
         </thead>

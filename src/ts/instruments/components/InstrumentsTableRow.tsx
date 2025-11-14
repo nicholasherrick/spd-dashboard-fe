@@ -3,7 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { InstrumentTableRowProps } from "../types";
 import Button from "../../shared/components/Button";
 import useInstruments from "../hooks/useInstruments";
-import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faPenToSquare,
+  faCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import { InstrumentsModalContext } from "../constants";
 
 const InstrumentsTableRow = ({
@@ -17,6 +21,9 @@ const InstrumentsTableRow = ({
       <tr>
         <td>{instrument.Name}</td>
         <td>{instrument.SterilizationType}</td>
+        <td>
+          {instrument.HandWashOnly ? <FontAwesomeIcon icon={faCheck} /> : null}
+        </td>
         <td>
           <Button
             type="button"
