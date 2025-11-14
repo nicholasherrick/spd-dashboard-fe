@@ -20,6 +20,7 @@ export interface Instrument {
 
 export interface InstrumentTableProps {
   showModal: (a: string, b?: Instrument) => void;
+  searchText: string;
 }
 
 export interface InstrumentTableRowProps {

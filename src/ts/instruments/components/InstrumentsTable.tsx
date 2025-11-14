@@ -1,9 +1,25 @@
+import { useMemo } from "react";
+
 import InstrumentsTableRow from "./InstrumentsTableRow";
 import type { Instrument, InstrumentTableProps } from "../types";
 import useInstruments from "../hooks/useInstruments";
 
-const InstrumentsTable = ({ showModal }: InstrumentTableProps) => {
+const InstrumentsTable = ({ showModal, searchText }: InstrumentTableProps) => {
   const { instrumentList } = useInstruments();
+
+  const filteredList = useMemo(() => {
+    if (!searchText) {
+      return instrumentList;
+    } else {
+      const text = searchText.toLowerCase();
+
+      return instrumentList?.filter(
+        (inst) =>
+          inst.Name.toLowerCase().includes(text) ||
+          inst.SterilizationType.toLowerCase().includes(text)
+      );
+    }
+  }, [instrumentList, searchText]);
 
   return instrumentList?.length ? (
     <div className="table-responsive">
@@ -16,7 +32,7 @@ const InstrumentsTable = ({ showModal }: InstrumentTableProps) => {
           </tr>
         </thead>
         <tbody className="table-group-divider">
-          {instrumentList.map((inst: Instrument) => (
+          {filteredList?.map((inst: Instrument) => (
             <InstrumentsTableRow
               key={inst.Id}
               instrument={inst}

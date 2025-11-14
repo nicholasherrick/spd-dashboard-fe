@@ -13,6 +13,7 @@ const Instruments = () => {
   const [currentInst, setCurrentInst] = useState<Instrument | undefined>(
     undefined
   );
+  const [searchText, setSearchText] = useState<string>("");
 
   const handleShow = (
     modalContext = InstrumentsModalContext.Add,
@@ -33,14 +34,35 @@ const Instruments = () => {
   return (
     <>
       <PageHeader text="Manage Instruments" />
-      <Button
-        className="btn btn-primary mb-3"
-        type="button"
-        onClick={() => handleShow()}
-      >
-        New
-      </Button>
-      <InstrumentsTable showModal={handleShow} />
+      <div className="row">
+        <div className="col-9">
+          <input
+            type="text"
+            className="form-control"
+            onChange={(e) => setSearchText(e.target.value)}
+            value={searchText}
+            placeholder="Search"
+          />
+        </div>
+        <div className="col-auto">
+          <Button
+            className="btn btn-secondary mb-3 me-3"
+            type="button"
+            onClick={() => setSearchText("")}
+            disabled={!searchText}
+          >
+            Clear
+          </Button>
+          <Button
+            className="btn btn-primary mb-3"
+            type="button"
+            onClick={() => handleShow()}
+          >
+            Create New
+          </Button>
+        </div>
+      </div>
+      <InstrumentsTable showModal={handleShow} searchText={searchText} />
       <InstrumentsModal
         show={showModal}
         handleHide={handleHide}

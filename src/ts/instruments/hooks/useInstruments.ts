@@ -7,7 +7,9 @@ import { LocalStorageKeys } from "../../shared/constants";
 const useInstruments = () => {
   const { setLocalStorage, getLocalStorage } = useLocalStorage();
 
-  const [instrumentList, setInstrumentList] = useState([]);
+  const [instrumentList, setInstrumentList] = useState<
+    [Instrument] | undefined
+  >(undefined);
 
   const getExistingData = useCallback(() => {
     return getLocalStorage(LocalStorageKeys.InstrumentList) || [];
